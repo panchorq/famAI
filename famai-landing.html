@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FaMAI — Agencia de Inteligencia Artificial</title>
+<meta name="description" content="FaMAI: agencia de inteligencia artificial. +5 años en informática, +3 años especializados en IA, +20 clientes en distintos países. Soluciones de IA aplicadas con rigor de ingeniería.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10151F;
+    --ink-soft:#1B2331;
+    --ink-line: rgba(244,241,233,0.14);
+    --paper:#EEF0F0;
+    --paper-deep:#E2E6E5;
+    --paper-line:#CBD1D0;
+    --text:#12161F;
+    --ash:#5B6570;
+    --ash-on-dark:#9BA7B1;
+    --cream:#F4F1E9;
+    --brass:#C29A4B;
+    --brass-deep:#8F6A24;
+    --white:#FFFFFF;
+    --blue:#2B4C8C;
+    --blue-bright:#6C93E0;
+
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', 'Courier New', monospace;
+
+    --radius:6px;
+    --radius-sm:3px;
+    --maxw:1180px;
+    --gutter:32px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *,*::before,*::after{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3{margin:0; font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--brass); color:var(--ink); padding:12px 20px;
+    font-family:var(--font-mono); font-size:13px; z-index:200;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter);}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass-deep);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px; background:var(--brass-deep);
+    display:inline-block;
+  }
+  .section--ink .eyebrow, .hero .eyebrow{ color:var(--brass); }
+  .section--ink .eyebrow::before, .hero .eyebrow::before{ background:var(--brass); }
+
+  /* ===== Header ===== */
+  .site-header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(238,240,240,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px var(--gutter);
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .nav__logo{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:0.08em;
+    text-decoration:none;
+    color:var(--text);
+  }
+  .nav__logo .logo-fam{color:var(--blue);}
+  .nav__logo .logo-ai{color:var(--brass-deep);}
+  .nav__links{
+    display:flex; gap:36px;
+    font-size:14.5px;
+  }
+  .nav__links a{
+    text-decoration:none; color:var(--text);
+    position:relative; padding-bottom:4px;
+  }
+  .nav__links a::after{
+    content:""; position:absolute; left:0; bottom:0;
+    width:0; height:1px; background:var(--brass-deep);
+    transition:width .25s ease;
+  }
+  .nav__links a:hover::after{width:100%;}
+  .nav__right{display:flex; align-items:center; gap:22px;}
+  .nav__cta{
+    font-family:var(--font-mono);
+    font-size:13px; letter-spacing:0.05em;
+    background:var(--ink); color:var(--cream);
+    padding:11px 20px; border-radius:var(--radius-sm);
+    text-decoration:none; white-space:nowrap;
+    transition:background .2s ease;
+  }
+  .nav__cta:hover{background:var(--brass-deep);}
+  .nav__toggle{
+    display:none; background:none; border:none; cursor:pointer;
+    width:32px; height:24px; position:relative;
+  }
+  .nav__toggle span, .nav__toggle span::before, .nav__toggle span::after{
+    content:""; position:absolute; left:0; width:100%; height:2px; background:var(--text);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .nav__toggle span{top:11px;}
+  .nav__toggle span::before{top:-8px;}
+  .nav__toggle span::after{top:8px;}
+  .nav__toggle.is-open span{background:transparent;}
+  .nav__toggle.is-open span::before{transform:translateY(8px) rotate(45deg);}
+  .nav__toggle.is-open span::after{transform:translateY(-8px) rotate(-45deg);}
+
+  /* ===== Hero ===== */
+  .hero{
+    background:var(--ink);
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+    padding:96px 0 64px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(244,241,233,0.035) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(244,241,233,0.035) 40px);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; top:-30%; right:-10%;
+    width:600px; height:600px;
+    background:radial-gradient(circle, rgba(194,154,75,0.16), transparent 70%);
+    pointer-events:none;
+  }
+  .hero__inner{position:relative; z-index:1; max-width:760px;}
+  .hero__title{
+    font-size:clamp(36px, 5.2vw, 62px);
+    line-height:1.08;
+    margin-top:22px;
+    color:var(--white);
+  }
+  .hero__title em{
+    font-style:italic; color:var(--brass); font-weight:500;
+  }
+  .hero__sub{
+    margin-top:24px;
+    max-width:560px;
+    font-size:17.5px;
+    color:var(--ash-on-dark);
+    line-height:1.7;
+  }
+  .hero__actions{
+    margin-top:40px;
+    display:flex; flex-wrap:wrap; gap:16px;
+  }
+  .btn{
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    letter-spacing:0.04em;
+    padding:15px 26px;
+    border-radius:var(--radius-sm);
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    border:1px solid transparent;
+  }
+  .btn--primary{background:var(--brass); color:var(--ink);}
+  .btn--primary:hover{transform:translateY(-2px); background:#D6AD5E;}
+  .btn--ghost{border-color:rgba(244,241,233,0.3); color:var(--cream);}
+  .btn--ghost:hover{border-color:var(--brass); color:var(--brass); transform:translateY(-2px);}
+  .btn--dark{background:var(--ink); color:var(--cream);}
+  .btn--dark:hover{background:var(--brass-deep); transform:translateY(-2px);}
+  .btn--outline-dark{border-color:rgba(18,22,31,0.25); color:var(--text);}
+  .btn--outline-dark:hover{border-color:var(--brass-deep); color:var(--brass-deep); transform:translateY(-2px);}
+
+  /* ===== Stats ledger ===== */
+  .stats{
+    background:var(--paper);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .stats__grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+  }
+  .stat{
+    padding:40px 28px;
+    border-left:1px solid var(--paper-line);
+    text-align:left;
+  }
+  .stat:first-child{border-left:none;}
+  .stat__value{
+    display:block;
+    font-family:var(--font-display);
+    font-size:clamp(30px, 3.4vw, 44px);
+    font-weight:600;
+    color:var(--brass-deep);
+    line-height:1;
+  }
+  .stat__label{
+    display:block;
+    margin-top:12px;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ash);
+    line-height:1.5;
+  }
+
+  /* ===== Section shell ===== */
+  .section{padding:120px 0;}
+  .section--tight{padding-top:100px;}
+  .section--ink{background:var(--ink); color:var(--cream);}
+  .section--paper{background:var(--paper);}
+  .section__head{max-width:640px; margin-bottom:64px;}
+  .section__title{
+    font-size:clamp(28px, 3.4vw, 42px);
+    margin-top:18px;
+    line-height:1.15;
+  }
+  .section--ink .section__title{color:var(--white);}
+  .section__intro{
+    margin-top:20px;
+    font-size:16.5px;
+    color:var(--ash);
+    max-width:560px;
+    line-height:1.7;
+  }
+  .section--ink .section__intro{color:var(--ash-on-dark);}
+
+  /* ===== Services ===== */
+  .services__grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--paper-line);
+    border:1px solid var(--paper-line);
+  }
+  .service-card{
+    background:var(--paper);
+    padding:44px 40px;
+  }
+  .service-card__num{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--brass-deep);
+    letter-spacing:0.06em;
+  }
+  .service-card__title{
+    font-size:22px;
+    margin-top:16px;
+  }
+  .service-card__text{
+    margin-top:14px;
+    color:var(--ash);
+    font-size:15.5px;
+    line-height:1.7;
+  }
+
+  /* ===== Trust / seal ===== */
+  .trust__grid{
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:72px;
+    align-items:center;
+  }
+  .trust__text p{
+    color:var(--ash-on-dark);
+    font-size:16.5px;
+    line-height:1.8;
+    margin-top:18px;
+  }
+  .trust__text p:first-of-type{margin-top:24px;}
+  .trust__mini{
+    margin-top:36px;
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+  }
+  .trust__mini-item{font-family:var(--font-mono); font-size:12px; letter-spacing:0.04em; color:var(--ash-on-dark);}
+  .trust__mini-item b{display:block; color:var(--brass); font-size:19px; font-family:var(--font-display); font-weight:600;}
+
+  .seal-wrap{
+    display:flex; justify-content:center; align-items:center;
+  }
+  .seal{
+    width:min(280px, 80%);
+    animation:spin 90s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .seal{animation:none;} }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .seal text{
+    font-family:var(--font-mono);
+    font-size:9.4px;
+    letter-spacing:2.5px;
+    fill:var(--brass);
+  }
+  .seal-center{
+    font-family:var(--font-display);
+  }
+
+  /* ===== Process ===== */
+  .process__list{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0;
+  }
+  .process-step{
+    padding:0 28px 0 0;
+    border-top:1px solid var(--paper-line);
+    padding-top:28px;
+  }
+  .process-step + .process-step{
+    border-left:1px solid var(--paper-line);
+    padding-left:28px;
+  }
+  .process-step__num{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--brass-deep);
+  }
+  .process-step__title{
+    font-size:19px;
+    margin-top:14px;
+    font-family:var(--font-display);
+    font-weight:600;
+  }
+  .process-step__text{
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--ash);
+    line-height:1.65;
+  }
+
+  /* ===== Reach strip ===== */
+  .reach{
+    margin-top:80px;
+    border-top:1px solid var(--paper-line);
+    padding-top:48px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+    align-items:center;
+  }
+  .reach__note{max-width:420px; font-size:15px; color:var(--ash); line-height:1.6;}
+  .reach__tags{display:flex; gap:14px; flex-wrap:wrap;}
+  .reach__tag{
+    font-family:var(--font-mono);
+    font-size:12px; letter-spacing:0.06em;
+    border:1px solid var(--paper-line);
+    padding:9px 16px;
+    border-radius:999px;
+    color:var(--ash);
+  }
+
+  /* ===== CTA final ===== */
+  .cta-final{
+    background:var(--ink);
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+  }
+  .cta-final::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(244,241,233,0.035) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(244,241,233,0.035) 40px);
+  }
+  .cta-final__inner{position:relative; z-index:1; text-align:center; max-width:680px; margin:0 auto;}
+  .cta-final .section__title{color:var(--white); margin-top:20px;}
+  .cta-final .section__intro{margin-left:auto; margin-right:auto;}
+  .cta-final__actions{
+    margin-top:40px;
+    display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+  }
+  /* ===== Footer ===== */
+  .site-footer{
+    background:#0B0F17;
+    color:var(--ash-on-dark);
+    padding:64px 0 32px;
+  }
+  .footer__grid{
+    display:grid;
+    grid-template-columns:1.4fr 0.8fr 0.8fr;
+    gap:48px;
+    padding-bottom:48px;
+    border-bottom:1px solid var(--ink-line);
+  }
+  .footer__logo{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:18px;
+    letter-spacing:0.08em;
+    color:var(--cream);
+  }
+  .footer__logo .logo-fam{color:var(--blue-bright);}
+  .footer__logo .logo-ai{color:var(--brass);}
+  .footer__tag{
+    margin-top:16px;
+    font-size:14.5px;
+    max-width:280px;
+    line-height:1.6;
+  }
+  .footer__col-title{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ash-on-dark);
+    opacity:0.7;
+  }
+  .footer__col ul{margin-top:18px; display:flex; flex-direction:column; gap:12px;}
+  .footer__col a{font-size:14.5px; text-decoration:none; color:var(--ash-on-dark);}
+  .footer__col a:hover{color:var(--brass);}
+  .footer__bottom{
+    padding-top:28px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:rgba(154,166,175,0.6);
+  }
+
+  /* ===== Reveal on scroll ===== */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px){
+    .trust__grid{grid-template-columns:1fr; gap:48px;}
+    .seal-wrap{order:-1;}
+    .footer__grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width: 860px){
+    .nav__links{display:none;}
+    .nav__toggle{display:block;}
+    .nav.is-open .nav__links{
+      display:flex; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--paper-line);
+      padding:8px var(--gutter) 20px;
+    }
+    .nav.is-open .nav__links a{padding:14px 0; border-bottom:1px solid var(--paper-line);}
+    .services__grid{grid-template-columns:1fr;}
+    .process__list{grid-template-columns:1fr 1fr; row-gap:32px;}
+    .process-step:nth-child(3){border-left:none; padding-left:0;}
+    .stats__grid{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(3){border-left:none;}
+    .stat{border-top:1px solid var(--paper-line);}
+    .stat:first-child, .stat:nth-child(2){border-top:none;}
+  }
+  @media (max-width: 560px){
+    .section{padding:80px 0;}
+    .hero{padding:72px 0 48px;}
+    .process__list{grid-template-columns:1fr;}
+    .process-step, .process-step + .process-step{border-left:none; padding-left:0; margin-top:24px;}
+    .stats__grid{grid-template-columns:1fr;}
+    .stat{border-left:none !important; border-top:1px solid var(--paper-line) !important;}
+    .stat:first-child{border-top:none !important;}
+    .footer__grid{grid-template-columns:1fr;}
+    .footer__bottom{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Saltar al contenido</a>
+
+<header class="site-header">
+  <nav class="nav" id="nav">
+    <a href="#main" class="nav__logo"><span class="logo-fam">FAM</span><span class="logo-ai">AI</span></a>
+    <ul class="nav__links">
+      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#por-que">Por qué FaMAI</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav__right">
+      <a href="https://wa.me/56950022347" target="_blank" rel="noopener" class="nav__cta">Hablemos</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <p class="eyebrow">Agencia de inteligencia artificial — alcance global</p>
+      <h1 class="hero__title">Inteligencia artificial construida con el <em>rigor</em> de la ingeniería.</h1>
+      <p class="hero__sub">En FaMAI diseñamos e implementamos soluciones de inteligencia artificial para empresas que necesitan resultados medibles. Cada proyecto está respaldado por años de trabajo real en informática, no por una demo armada para impresionar.</p>
+      <div class="hero__actions">
+        <a href="#contacto" class="btn btn--primary">Hablemos de tu proyecto</a>
+        <a href="#soluciones" class="btn btn--ghost">Ver soluciones</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS LEDGER -->
+  <section class="stats">
+    <div class="wrap stats__grid">
+      <div class="stat">
+        <span class="stat__value">+5</span>
+        <span class="stat__label">Años de experiencia en informática</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">+3</span>
+        <span class="stat__label">Años especializados en inteligencia artificial</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">+20</span>
+        <span class="stat__label">Clientes atendidos</span>
+      </div>
+      <div class="stat">
+        <span class="stat__value">Global</span>
+        <span class="stat__label">Clientes en distintos países, equipo remoto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section section--paper section--tight" id="soluciones">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">Soluciones · 01</p>
+        <h2 class="section__title">Qué hacemos</h2>
+        <p class="section__intro">Diseñamos e implementamos inteligencia artificial adaptada a la operación real de cada empresa. Sin plantillas genéricas ni funciones que nadie termina usando.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="services__grid reveal">
+        <article class="service-card">
+          <p class="service-card__num">01</p>
+          <h3 class="service-card__title">Automatización de procesos</h3>
+          <p class="service-card__text">Identificamos tareas repetitivas y las convertimos en flujos automatizados con IA, liberando horas de trabajo del equipo para lo que realmente agrega valor.</p>
+        </article>
+        <article class="service-card">
+          <p class="service-card__num">02</p>
+          <h3 class="service-card__title">Agentes y atención al cliente con IA</h3>
+          <p class="service-card__text">Diseñamos asistentes conversacionales que responden, filtran y escalan consultas con criterio, disponibles cuando el cliente los necesita.</p>
+        </article>
+        <article class="service-card">
+          <p class="service-card__num">03</p>
+          <h3 class="service-card__title">Análisis de datos e IA predictiva</h3>
+          <p class="service-card__text">Transformamos datos dispersos en información útil para tomar decisiones, con modelos capaces de anticipar comportamientos y tendencias del negocio.</p>
+        </article>
+        <article class="service-card">
+          <p class="service-card__num">04</p>
+          <h3 class="service-card__title">Integración con sistemas existentes</h3>
+          <p class="service-card__text">Conectamos IA a las herramientas que la empresa ya usa —CRM, ERP, sitio web, plataformas internas— sin reemplazar lo que ya funciona.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ FAMAI -->
+  <section class="section section--ink" id="por-que">
+    <div class="wrap trust__grid">
+      <div class="trust__text reveal">
+        <p class="eyebrow">Por qué FaMAI · 02</p>
+        <h2 class="section__title">Experiencia real, no una promesa de marketing.</h2>
+        <p>FaMAI nace de más de cinco años de trabajo en informática y tres años de especialización activa en inteligencia artificial. Esa base técnica es la diferencia entre una solución que impresiona en una demo y una que funciona todos los días dentro de una empresa.</p>
+        <p>Hoy más de veinte clientes en distintos países han confiado en nuestro trabajo. Operamos de forma remota y respondemos con los mismos estándares de calidad sin importar la zona horaria.</p>
+        <div class="trust__mini">
+          <div class="trust__mini-item"><b>+5</b>Informática</div>
+          <div class="trust__mini-item"><b>+3</b>IA aplicada</div>
+          <div class="trust__mini-item"><b>+20</b>Clientes</div>
+          <div class="trust__mini-item"><b>∞</b>Zonas horarias</div>
+        </div>
+      </div>
+      <div class="seal-wrap reveal">
+        <svg class="seal" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sello FaMAI, trayectoria comprobada">
+          <defs>
+            <path id="sealPath" d="M120,120 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0" />
+          </defs>
+          <circle cx="120" cy="120" r="118" fill="none" stroke="rgba(194,154,75,0.35)" stroke-width="1"/>
+          <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(194,154,75,0.55)" stroke-width="1"/>
+          <circle cx="120" cy="120" r="70" fill="none" stroke="rgba(194,154,75,0.28)" stroke-width="1"/>
+          <text>
+            <textPath href="#sealPath" startOffset="0%">FAMAI · TRAYECTORIA COMPROBADA · INTELIGENCIA ARTIFICIAL APLICADA · </textPath>
+          </text>
+          <g class="seal-center" text-anchor="middle">
+            <text x="120" y="130" font-size="34" fill="#F4F1E9" font-weight="600">FM</text>
+            <text x="120" y="152" font-size="9" letter-spacing="2" fill="#9BA7B1">AGENCIA DE IA</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="section section--paper" id="proceso">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">Cómo trabajamos · 03</p>
+        <h2 class="section__title">Un proceso claro, de principio a fin.</h2>
+        <p class="section__intro">Nada de cajas negras. Cada proyecto sigue el mismo método, pensado para reducir riesgo y dar visibilidad real del avance.</p>
+      </div>
+
+      <div class="process__list reveal">
+        <div class="process-step">
+          <p class="process-step__num">01</p>
+          <h3 class="process-step__title">Diagnóstico</h3>
+          <p class="process-step__text">Analizamos la operación de tu empresa para identificar dónde la IA genera impacto real, sin sobre-prometer.</p>
+        </div>
+        <div class="process-step">
+          <p class="process-step__num">02</p>
+          <h3 class="process-step__title">Diseño de la solución</h3>
+          <p class="process-step__text">Definimos arquitectura, alcance técnico y resultados esperados antes de escribir una sola línea de código.</p>
+        </div>
+        <div class="process-step">
+          <p class="process-step__num">03</p>
+          <h3 class="process-step__title">Implementación</h3>
+          <p class="process-step__text">Desarrollamos e integramos la solución con estándares de ingeniería de software, no con prototipos desechables.</p>
+        </div>
+        <div class="process-step">
+          <p class="process-step__num">04</p>
+          <h3 class="process-step__title">Soporte y mejora continua</h3>
+          <p class="process-step__text">Acompañamos el proyecto después del lanzamiento, ajustando el sistema con datos de uso real.</p>
+        </div>
+      </div>
+
+      <div class="reach reveal">
+        <p class="reach__note">Trabajamos con empresas en distintos países, de forma 100% remota, con procesos y comunicación pensados para equipos que no comparten oficina.</p>
+        <div class="reach__tags">
+          <span class="reach__tag">Trabajo remoto</span>
+          <span class="reach__tag">Alcance global</span>
+          <span class="reach__tag">Comunicación directa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section cta-final" id="contacto">
+    <div class="wrap cta-final__inner">
+      <p class="eyebrow">Contacto · 04</p>
+      <h2 class="section__title">Hablemos de lo que tu empresa necesita.</h2>
+      <p class="section__intro">Cuéntanos en qué punto está tu empresa y qué te gustaría resolver con inteligencia artificial. Te respondemos con una mirada técnica, sin compromisos ni letra chica.</p>
+      <div class="cta-final__actions">
+        <a href="https://wa.me/56950022347" target="_blank" rel="noopener" class="btn btn--primary">Escríbenos por WhatsApp</a>
+        <a href="mailto:fcomlopezortiz@gmail.com" class="btn btn--ghost">Enviar un correo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <p class="footer__logo"><span class="logo-fam">FAM</span><span class="logo-ai">AI</span></p>
+        <p class="footer__tag">Inteligencia artificial aplicada con el rigor de años de trabajo en informática.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Navegación</p>
+        <ul>
+          <li><a href="#soluciones">Soluciones</a></li>
+          <li><a href="#por-que">Por qué FaMAI</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Contacto</p>
+        <ul>
+          <li><a href="https://wa.me/56950022347" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:fcomlopezortiz@gmail.com">Escribir por correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span id="year">© 2026 FaMAI. Todos los derechos reservados.</span>
+      <span>Agencia de inteligencia artificial</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('is-open');
+    navToggle.classList.toggle('is-open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav__links a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      navToggle.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Footer year
+  const yearEl = document.getElementById('year');
+  yearEl.textContent = `© ${new Date().getFullYear()} FaMAI. Todos los derechos reservados.`;
+</script>
+
+</body>
+</html>
