@@ -236,6 +236,45 @@
     line-height:1.5;
   }
 
+  /* ===== Flow strip ===== */
+  .flow{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px 6px;
+    padding:32px var(--gutter);
+  }
+  .flow__step{
+    padding:10px 16px;
+    border:1px solid var(--paper-line);
+    border-radius:999px;
+    background:var(--white);
+  }
+  .flow__label{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--ash);
+    white-space:nowrap;
+  }
+  .flow__step--accent{
+    background:var(--ink);
+    border-color:var(--ink);
+  }
+  .flow__step--accent .flow__label{color:var(--brass);}
+  .flow__step--final{
+    background:var(--brass);
+    border-color:var(--brass);
+  }
+  .flow__step--final .flow__label{color:var(--ink); font-weight:600;}
+  .flow__arrow{
+    color:var(--paper-line);
+    font-size:14px;
+  }
+  @media (max-width: 700px){
+    .flow{justify-content:flex-start;}
+  }
+
   /* ===== Section shell ===== */
   .section{padding:120px 0;}
   .section--tight{padding-top:100px;}

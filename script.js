@@ -33,5 +33,5 @@ if ('IntersectionObserver' in window) {
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) {
-  yearEl.textContent = `© ${new Date().getFullYear()} FaMAI. Todos los derechos reservados.`;
+  yearEl.textContent = `© ${new Date().getFullYear()} FamAI. Todos los derechos reservados.`;
 }
